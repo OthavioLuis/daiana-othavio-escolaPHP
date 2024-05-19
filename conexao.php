@@ -18,7 +18,7 @@ function Login($usuario, $senha)
 {
     global $conexao;
 
-    $comando = "SELECT * FROM aluno WHERE cd_aluno = ? AND dt_nasc = ?";
+    $comando = "SELECT * FROM aluno WHERE cd_aluno = ? AND senha = ?";
     
     $stmt = $conexao->prepare($comando);
     $stmt->bind_param("ss", $usuario, $senha);
@@ -33,7 +33,6 @@ function Login($usuario, $senha)
         $_SESSION['quem'] = $quem['nm_aluno'];
         $_SESSION['dt_nasc'] = $quem['dt_nasc'];
         $_SESSION['turma'] = $quem['id_turma'];
-        $_SESSION['curso'] = $quem['nm_curso'];
 
         header('Location: aluno.php');
         exit;
@@ -66,9 +65,9 @@ function getTurma($curso) { //aqui elel vai filtrar conforme oque escolheu do cu
     return $retorno;
 }
 
-function cadastrarAluno($id_turma, $cd_aluno, $nm_aluno, $dt_nasc) {
+function cadastrarAluno($turma, $cd_aluno, $nm_aluno, $dt_nasc) {
 	//a senha inicial do aluno será seu RM
-	$sql='INSERT INTO aluno VALUES('.$cd_aluno.',"'.$nm_aluno.'","'.$dt_nasc.'","'.$cd_aluno.'",'.$id_turma.')';
+	$sql='INSERT INTO aluno VALUES('.$cd_aluno.',"'.$nm_aluno.'","'.$dt_nasc.'","'.$cd_aluno.'",'.$turma.')';
 	$retorno = $GLOBALS['conexao']->query($sql);
 	if($retorno){
 	    echo "Cadastrado com sucesso";
@@ -77,7 +76,7 @@ function cadastrarAluno($id_turma, $cd_aluno, $nm_aluno, $dt_nasc) {
 	}
 }
 
-function getAluno($turma){
+function getAlunos($turma){
     $sql = 'SELECT a.cd_aluno, a.nm_aluno, a.dt_nasc, t.nm_turma as turma
             FROM aluno a, turma t
             WHERE t.cd_turma = a.id_turma';

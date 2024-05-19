@@ -14,9 +14,9 @@
 <body>
     <div class="corpo">
         <div >
-            <form class="inputs" id="cadastrarAluno">
+            <form class="inputs" id="cadastrarAluno" action="ajax.php" method="post">
                 <p>Cadastrar</p>
-                <select name="Curso" id="curso" class="botao-cadastro" type="text">
+                <select name="curso" id="curso" class="botao-cadastro" type="text">
                     <option></option>
                     <?PHP
                         $lista = getCurso(null);
@@ -25,7 +25,7 @@
                         }
                     ?>
                 </select>
-                <select name="Turma" id="turma" class="botao-cadastro">
+                <select name="turma" id="turma" class="botao-cadastro">
                 <option></option>
                     <?PHP
                         $lista = getTurma(null);
@@ -34,11 +34,11 @@
                         }
                     ?>
                 </select>
-                <input placeholder="RM" name="RM" type="text" id="rm" class="botao-rm">
+                <input placeholder="RM" name="cd_aluno" type="number" id="cd_aluno" class="botao-rm">
                 </input>
-                <input placeholder="Nome" name="Nome" id="nome" type="text" class="botao-rm">
+                <input placeholder="Nome" name="nm_aluno" id="nm_aluno" type="text" class="botao-rm">
                 </input>
-                <input name="Nascimeno" id="nasc" type="date" class="botao-rm">
+                <input name="dt_nasc" id="dt_nasc" type="date" class="botao-rm">
                 </input>
                 <label class="btn-arquivo">
                     <p>Arquivo</p>
@@ -70,71 +70,22 @@
                 </select>
                 <button class="btn-importar btn11">Listar</button>
             </div>
-            <table>
-                <div class="caixa02"><p>Alunos Importados | alunos encontrados</p></div>
-                <tr class="lista1">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="lista-rigth"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="lista-rigth"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="lista-rigth"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="lista-rigth"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="lista-rigth"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="lista-rigth"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="lista-rigth"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="lista-rigth"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="lista-rigth"></td>
-                </tr>
+            <table id="alunos">
+                <caption>
+                    <h1>Alunos importados | Alunos encontrados</h1>
+                </caption>
+                <thead>
+                    <tr>
+                        <th>RM</th>
+                        <th>Nome</th>
+                        <th>Data de Nascimento</th>
+                        <th>Turma</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+                <tbody id="tb_alunos">
+                    <!-- Linhas serão preenchidas via AJAX -->
+                </tbody>
             </table>
             <button class="btn-importar btn2121">Promover Alunos</button>
         </div>
