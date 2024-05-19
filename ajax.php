@@ -18,7 +18,7 @@ if($_POST) {
 }
 
 if(isset($_GET['aluno'])){
-    $lista = getAlunos($_GET['alunos']);
+    $lista = getAluno($_GET['alunos']);
     $retorno = '';
     while($aluno = $lista->fetch_array()){
         $retorno .='<tr>
